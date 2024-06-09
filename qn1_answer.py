@@ -3,10 +3,10 @@ import numpy as np
 from skyfield.api import load, EarthSatellite
 from datetime import datetime, timedelta
 
-#Tracker's TLE below is found out using the orbital parameters given in the Question number 1
+#Space Based Sensor (Tracker's) TLE below is found out using the orbital parameters given in the Question number 1
 epoch = datetime(2023, 3, 21, 0, 0, 0)
-tle_line1 = f"1 00000U 00000A   {epoch.strftime('%y%j.00000000')}  .00000000  00000-0  00000-0 0  9991"
-tle_line2 = f"2 00000 097.4000 269.8035 0000000 331.7425 000.0000 15.00000000    00"
+tracker_tle_line1 = f"1 00000U 00000A   {epoch.strftime('%y%j.00000000')}  .00000000  00000-0  00000-0 0  9991"
+tracker_tle_line2 = f"2 00000 097.4000 269.8035 0000000 331.7425 000.0000 15.00000000    00"
 
 # Space object's TLE (given directly in the question)
 object_tle_line1 = "1 03386U 65082MY  23081.95345837  .00004143  00000-0  45959-3 0  9996"
@@ -14,7 +14,7 @@ object_tle_line2 = "2 03386  32.3737 289.5919 0008599 302.6285  57.3541 14.86044
 
 # Loading the timescale and creating a satellite object
 ts = load.timescale()
-tracker_sat = EarthSatellite(tle_line1, tle_line2, 'Tracker', ts)
+tracker_sat = EarthSatellite(tracker_tle_line1, tracker_tle_line2, 'Tracker', ts)
 object_sat = EarthSatellite(object_tle_line1, object_tle_line2, 'Object', ts)
 eph = load('de421.bsp')
 
@@ -66,6 +66,7 @@ if crossing_events:
         print(f"Time: {t.utc_iso()}")
 else:
     print("No crossing events found.")
+print("\n")
 
 # Print visible events
 if visible_events:
